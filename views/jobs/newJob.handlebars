@@ -1,0 +1,46 @@
+<main class="contenedor">
+  <form action="/jobs/new" method="POST" class="default-form">
+    <h3>Informacion General</h3>
+    <div class="campo"> 
+      <label>Titulo</label>
+      <input type="text" name="title" placeholder="Node developer" required>
+    </div>
+    <div class="campo"> 
+      <label>Empresa</label>
+      <input type="text" name="company" placeholder="Empresa que contrata" required>
+    </div>
+    <div class="campo"> 
+      <label>Ubicacion</label>
+      <input type="text" name="location" placeholder="Ej: Argentina" required>
+    </div>
+    <div class="campo"> 
+      <label>Salario (USD)</label>
+      <input type="text" name="salary" placeholder="Ej: Salario Pretendido" required>
+    </div>
+    <div class="campo">
+      <label>Contratacion</label>
+      <select name="hours">
+        <option value="" disabled selected>-- Selecciona --</option>
+        <option value="Freelance">Freelance</option>
+        <option value="Tiempo completo">Tiempo Completo</option>
+        <option value="Medio tiempo">Medio Tiempo</option>
+        <option value="Por proyecto">Por Proyecto</option>
+      </select>
+    </div>
+    <h3>Descripcion del puesto</h3>
+    <div class="campo descripcion">
+      <label>Descripcion</label>
+      <input type="text" id="x" name="description">
+      <trix-editor input="x"></trix-editor>
+    </div>
+    <h3>Conocimiento</h3>
+    <ul class="lista-conocimientos">
+      {{#selectSkills a}}
+      {{/selectSkills}}
+    </ul>
+    <div class="campo centrar-horizontal">
+      <input type="hidden" name="skills">
+      <input type="submit" value="Publicar" class="btn btn-azul">
+    </div>
+  </form>
+</main>

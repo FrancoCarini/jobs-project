@@ -14,13 +14,15 @@ const path = require('path')
 
 // Routes
 const indexRoutes = require('./routes/index')
+const jobsRoutes = require('./routes/jobs')
 
 const app = express()
 
 // Use Engine View Handlebars
 app.engine('handlebars', 
   exphbs({
-    defaultLayout: 'layout'
+    defaultLayout: 'layout',
+    helpers: require('./helpers/handlebars')
   })
 )
 app.set('view engine', 'handlebars')
@@ -41,6 +43,7 @@ app.use(session({
 
 // Mount Routes
 app.use(indexRoutes)
+app.use('/jobs', jobsRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log('Server running')

@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "watch": "webpack --w --mode development"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +20,12 @@
     "mongoose": "^5.9.25",
     "shortid": "^2.2.15",
     "slug": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12"
   }
 }
