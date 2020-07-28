@@ -15,6 +15,7 @@ const path = require('path')
 // Routes
 const indexRoutes = require('./routes/index')
 const jobsRoutes = require('./routes/jobs')
+const usersRoutes = require('./routes/users')
 
 const app = express()
 
@@ -47,6 +48,7 @@ app.use(session({
 // Mount Routes
 app.use(indexRoutes)
 app.use('/jobs', jobsRoutes)
+app.use('/users', usersRoutes)
 
 app.listen(process.env.PORT, () => {
   console.log('Server running')
