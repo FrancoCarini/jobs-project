@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 const skills = []
 const addSkill = e => {
   if (e.target.tagName === 'LI') {
-    const skillText = e.target.textContent
+    const skillid = e.target.dataset.skillid
     if (e.target.classList.contains('activo')) {
       // Remove from skills array
-      const index = skills.indexOf(skillText);
+      const index = skills.indexOf(skillid);
       if (index > -1) {
         skills.splice(index, 1);
       }
@@ -20,7 +20,7 @@ const addSkill = e => {
       e.target.classList.remove('activo')
     } else {
       // add to skills array
-      skills.push(skillText)
+      skills.push(skillid)
       // Add class activo to li
       e.target.classList.add('activo')
     }

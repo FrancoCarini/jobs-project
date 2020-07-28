@@ -40,13 +40,18 @@ const JobSchema = new mongoose.Schema({
     type: String,
     lowercase: true
   },
-  skills: [String],
+  skills: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Skill"
+    }
+  ],
   applicants: [{
     nombre: String,
     email: String,
     cv: String
-  }]
-})
+  }]}
+)
 
 JobSchema.pre('save', function(next) {
   const url = slug(this.title)

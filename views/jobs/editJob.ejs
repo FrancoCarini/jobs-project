@@ -1,0 +1,58 @@
+<%- contentFor('css') %>
+<link rel="stylesheet" href="/css/trix.css">
+
+<%- contentFor('body') %>
+<main class="contenedor">
+  <form action="/jobs/edit/<%= job.url %>" method="POST" class="default-form">
+    <h3>Informacion General</h3>
+    <div class="campo"> 
+      <label>Titulo</label>
+      <input type="text" name="title" placeholder="Node developer" value="<%= job.title %>" required>
+    </div>
+    <div class="campo"> 
+      <label>Empresa</label>
+      <input type="text" name="company" placeholder="Empresa que contrata" value="<%= job.company %>" required>
+    </div>
+    <div class="campo"> 
+      <label>Ubicacion</label>
+      <input type="text" name="location" placeholder="Ej: Argentina" value="<%= job.location %>" required>
+    </div>
+    <div class="campo"> 
+      <label>Salario (USD)</label>
+      <input type="text" name="salary" placeholder="Ej: Salario Pretendido" value="<%= job.salary %>" required>
+    </div>
+    <div class="campo">
+      <label>Contratacion</label>
+      <select name="hours">
+        <option value="" disabled>-- Selecciona --</option>
+        <option value="Freelance" <%= (job.hours === 'Freelance' ? "selected" : '') %> >Freelance</option>
+        <option value="Tiempo completo" <%= (job.hours === 'Tiempo completo' ? "selected" : '') %>>Tiempo Completo</option>
+        <option value="Medio tiempo" <%= (job.hours === 'Medio tiempo' ? "selected" : '') %>>Medio Tiempo</option>
+        <option value="Por proyecto" <%= (job.hours === 'Por proyecto' ? "selected" : '') %>>Por Proyecto</option>
+      </select>
+    </div>
+    <h3>Descripcion del puesto</h3>
+    <div class="campo descripcion">
+      <label>Descripcion</label>
+      <input type="text" id="x" value="<%- job.description %>" name="description">
+      <trix-editor input="x"></trix-editor>
+    </div>
+    <h3>Conocimiento</h3>
+    <ul class="lista-conocimientos">
+      <% allSkills.forEach(skill => {%>
+        <% if (job.skills.findIndex( s => s._id.toString() === skill._id.toString() ) > -1) { %>
+          <li class="activo" data-skillid="<%= skill._id %>"><%= skill.name %></li>
+        <% } else { %>
+          <li data-skillid="<%= skill._id %>"><%= skill.name %></li>
+          <% } %>
+      <% }) %>
+    </ul>
+    <div class="campo centrar-horizontal">
+      <input type="hidden" name="skills" value="<%= job.skills.map(s => s._id).join(',') %>">
+      <input type="submit" value="Editar" class="btn btn-azul">
+    </div>
+  </form>
+</main>
+
+<%- contentFor('js') %>
+<script src="/js/trix.js"></script>

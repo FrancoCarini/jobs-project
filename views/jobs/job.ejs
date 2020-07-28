@@ -1,0 +1,36 @@
+<div class="contenido-superior vacante contendor">
+  <div class="caja">
+    <p class="etiqueta">Empresa</p>
+    <p class="nombre"><%= job.company %></p>
+  </div>
+  <div class="caja">
+    <p class="etiqueta">Ubicacion</p>
+    <p class="nombre"><%= job.location %></p>
+  </div>
+  <div class="caja">
+    <p class="etiqueta">Contrato</p>
+    <p class="nombre"><%= job.hours %></p>
+  </div>
+  <div class="caja">
+    <p class="etiqueta">Salario</p>
+    <p class="nombre">$ <%= job.salary %></p>
+  </div>
+</div>
+
+<div class="vacante-contenedor contenedor">
+  <main class="contenido">
+    <h2>Descripcion del puesto</h2>
+    <div class="vacante-descripcion">
+      <%- job.description %>
+    </div>
+    <a href="/jobs/edit/<%= job.url %>" class="btn btn-azul editar-btn">Editar</a>
+  </main>
+  <aside class="sidebar">
+    <h2>Conocimientos Deseables</h2>
+    <ul class="skills">
+      <% job.skills.forEach(skill => { %>
+        <li><%= skill.name %></li>
+      <% }) %>
+    </ul>
+  </aside>
+</div>

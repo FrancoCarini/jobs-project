@@ -1,3 +1,7 @@
+<%- contentFor('css') %>
+<link rel="stylesheet" href="/css/trix.css">
+
+<%- contentFor('body') %>
 <main class="contenedor">
   <form action="/jobs/new" method="POST" class="default-form">
     <h3>Informacion General</h3>
@@ -35,8 +39,9 @@
     </div>
     <h3>Conocimiento</h3>
     <ul class="lista-conocimientos">
-      {{#selectSkills a}}
-      {{/selectSkills}}
+      <% skills.forEach(s => {%>
+      <li data-skillid="<%= s._id %>"><%= s.name %></li>
+      <% }) %>
     </ul>
     <div class="campo centrar-horizontal">
       <input type="hidden" name="skills">
@@ -44,3 +49,6 @@
     </div>
   </form>
 </main>
+
+<%- contentFor('js') %>
+<script src="/js/trix.js"></script>

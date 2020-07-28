@@ -1,0 +1,52 @@
+[
+	{
+    "name": "NodeJs",
+    "active": 1,
+    "order": 1
+  },
+  {
+    "name": "MongoDb",
+    "active": 1,
+    "order": 2
+  },
+  {
+    "name": "PostresSql",
+    "active": 1,
+    "order": 3
+  },
+  {
+    "name": "Vainilla JS",
+    "active": 1,
+    "order": 4
+  },
+  {
+    "name": "HTML5",
+    "active": 1,
+    "order": 5
+  },
+  {
+    "name": "CSS",
+    "active": 1,
+    "order": 6
+  },
+  {
+    "name": "React",
+    "active": 1,
+    "order": 7
+  },
+  {
+    "name": "Vue JS",
+    "active": 1,
+    "order": 8
+  },
+  {
+    "name": "Mongoose",
+    "active": 1,
+    "order": 9
+  },
+  {
+    "name": "Sequelize",
+    "active": 1,
+    "order": 10
+  }
+]

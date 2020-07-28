@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/trix.css">
+  <%- defineContent('css') %>
   <link rel="stylesheet" href="/css/app.css">
-  <title>{{ pageTitle }}</title>
+  <title><%= pageTitle %></title>
 </head>
 <body>
   <div class="nombre-sitio contenedor">
@@ -14,30 +14,30 @@
       <a href="/">devJobs</a>
     </h1>
 
-    {{#if searchBar }}
+    <% if (typeof searchBar != 'undefined') { %>
       <div class="buscador">
         <form action="#">
           <input type="text" class="buscar">
           <input type="submit" class="Buscar">
         </form>
       </div>
-    {{/if}}
+      <% } %>
   </div>
 
   <header class="site-header contenedor separador">
-    <h2>{{pageTitle}}</h2>
-    {{#if tagline}}
-      <p class="tagline">{{tagline}}</p>
-    {{/if}}
-    {{#if vacancyButton}}
+    <h2><%= pageTitle %></h2>
+    <% if (typeof tagline != 'undefined') { %>
+      <p class="tagline"><%= tagline %></p>
+    <% } %>
+    <% if (typeof vacancyButton != 'undefined') { %>
       <a href="/jobs/new" class="btn btn-azul">Publicar Vacante</a>
-    {{/if}}
+      <% } %>
   </header>
 
   <div class="contenido-principal contenedor">
-    {{{ body }}}
+    <%- body -%>
   </div>
-  <script src="/js/trix.js"></script>
+  <%- defineContent('js') %>
   <script src="/dist/bundle.js"></script>
 </body>
 </html>
