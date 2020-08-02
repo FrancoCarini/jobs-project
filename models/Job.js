@@ -50,8 +50,12 @@ const JobSchema = new mongoose.Schema({
     nombre: String,
     email: String,
     cv: String
-  }]}
-)
+  }],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
+})
 
 JobSchema.pre('save', function(next) {
   const url = slug(this.title)

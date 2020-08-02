@@ -1,4 +1,5 @@
 <div class="contendor">
+  <%- include('../partials/messages.ejs') %>
   <form action="/users/new" method="POST" class="default-form">
     <div class="campo">
       <label>Nombre</label>
@@ -17,7 +18,7 @@
       <input type="password" name="repeatPassword" placeholder="Repetir password">
     </div>
     <div class="campo acciones">
-      <a href="/init-session">Volver a Iniciar Sesion</a>
+      <a href="/users/init-session">Volver a Iniciar Sesion</a>
     </div>
     <div class="campo">
       <input type="submit" value="Crear cuenta" class="btn btn-azul">

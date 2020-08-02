@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const dotenv = require('dotenv')
 //Load env vars
 dotenv.config({path: './config/config.env'})
@@ -8,9 +9,11 @@ connectDB()
 
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const passport = require('./config/passport')
 const MongoStore = require('connect-mongo')(session)
 const expressLayouts = require('express-ejs-layouts')
-const path = require('path')
+const flash = require('connect-flash')
+const expressSanitizer = require('express-sanitizer');
 
 // Routes
 const indexRoutes = require('./routes/index')
@@ -28,6 +31,8 @@ app.set('view engine', 'ejs');
 // Set Layout
 app.set('layout', 'layouts/layout');
 
+app.use(expressSanitizer())
+
 // Body Parser
 app.use(express.urlencoded({ extended: false }))
 
@@ -44,6 +49,17 @@ app.use(session({
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(flash())
+
+app.use((req, res, next) => {
+  res.locals.messages = req.flash()
+  next()
+})
 
 // Mount Routes
 app.use(indexRoutes)

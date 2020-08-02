@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -40,5 +40,20 @@ UserSchema.pre('save', async function(next) {
   const salt = await bcrypt.genSalt(10)
   this.password = await bcrypt.hash(this.password, salt)
 })
+
+UserSchema.post('save', function(error, doc, next) {
+  if (error.name === 'MongoError' && error.code === 11000) {
+    next(`El email ya esta registrado`)
+  } else if (error.name === 'ValidationError') {
+    next(new Error(Object.values(error.errors).map(val => val.message)))
+  } else {
+    next();
+  }
+});
+
+// Match user entered password to hashed password in database
+UserSchema.methods.matchPassword = async function(enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password)
+}
 
 module.exports = mongoose.model('User', UserSchema)

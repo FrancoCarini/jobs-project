@@ -3,7 +3,6 @@ const Job = require('../models/Job')
 exports.showIndex = async (req, res) => {
   const jobs = await Job.find()
 
-  console.log(jobs)
   if (!jobs) return next()
 
   res.render('index', {

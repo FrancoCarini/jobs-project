@@ -13,7 +13,14 @@ exports.newJobForm = async (req, res) => {
 
 exports.addJob = async (req, res) => {
   const job = new Job(req.body)
+  job.title = req.sanitize(req.body.title)
+  job.location = req.sanitize(req.body.location)
+  job.description = req.sanitize(req.body.description)
 
+  // User Save
+  job.user = req.user._id
+
+  // Required Skills 
   job.skills = req.body.skills.split(',')
   const newJob = await job.save()
   res.redirect(`/jobs/${newJob.url}`)
@@ -35,6 +42,12 @@ exports.getJob = async (req, res, next) => {
 exports.editJobForm = async (req, res, next) => {
   const job = await Job.findOne({url: req.params.url})
     .populate('skills');
+
+  // Check if the job was created by the same user
+  if (job.user.toString() !== req.user.id) {
+    req.flash('error', 'El trabajo a editar no fue creado por vos. No podes editarlo.')
+    return res.redirect(`/users/administration`)
+  }
 
   if (!job) return next()
 

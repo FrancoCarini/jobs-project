@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+const { isUserAuth } = require('../middleware/isAuth')
+
 const { newJobForm, 
   addJob, 
   getJob, 
@@ -8,12 +10,12 @@ const { newJobForm,
   editJob } = require('../controllers/jobs')
 
 router.route('/new')
-  .get(newJobForm)
-  .post(addJob)
+  .get(isUserAuth, newJobForm)
+  .post(isUserAuth, addJob)
 
 router.get('/:url', getJob)
 router.route('/edit/:url')
-  .get(editJobForm)
-  .post(editJob)
+  .get(isUserAuth, editJobForm)
+  .post(isUserAuth, editJob)
 
 module.exports = router

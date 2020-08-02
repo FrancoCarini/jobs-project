@@ -1,0 +1,20 @@
+<main class="contenedor">
+  <%- include('../partials/messages.ejs') %>
+  <form action="/users/init-session" method="POST" class="default-form">
+    <div class="campo">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="Ingresa tu email">
+    </div>
+    <div class="campo">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Ingresa tu password">
+    </div>
+    <div class="campo acciones">
+      <a href="/users/new">Crear Cuenta</a>
+      <a href="/users/reset-password">Olvide mi password</a>
+    </div>
+    <div class="campor">
+      <button type="submit" class="btn btn-azul">Iniciar Sesion</button>
+    </div>
+  </form>
+</main>

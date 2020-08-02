@@ -22,6 +22,13 @@
         </form>
       </div>
       <% } %>
+      <% if (typeof closeSession != 'undefined') { %>
+        <div class="cerrar-sesion">
+          <p>Hola! <%= username %></p>
+          <a href="/users/administration">Administracion</a>
+          <a href="/users/close-session">Cerrar Sesion</a>
+        </div>
+      <% } %>
   </div>
 
   <header class="site-header contenedor separador">
