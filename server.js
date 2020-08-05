@@ -13,7 +13,6 @@ const passport = require('./config/passport')
 const MongoStore = require('connect-mongo')(session)
 const expressLayouts = require('express-ejs-layouts')
 const flash = require('connect-flash')
-const expressSanitizer = require('express-sanitizer');
 
 // Routes
 const indexRoutes = require('./routes/index')
@@ -30,8 +29,6 @@ app.set('view engine', 'ejs');
 
 // Set Layout
 app.set('layout', 'layouts/layout');
-
-app.use(expressSanitizer())
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }))

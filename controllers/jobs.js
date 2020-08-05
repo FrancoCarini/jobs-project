@@ -13,9 +13,6 @@ exports.newJobForm = async (req, res) => {
 
 exports.addJob = async (req, res) => {
   const job = new Job(req.body)
-  job.title = req.sanitize(req.body.title)
-  job.location = req.sanitize(req.body.location)
-  job.description = req.sanitize(req.body.description)
 
   // User Save
   job.user = req.user._id
@@ -44,7 +41,7 @@ exports.editJobForm = async (req, res, next) => {
     .populate('skills');
 
   // Check if the job was created by the same user
-  if (job.user.toString() !== req.user.id) {
+  if (job.user.toString() !== req.user._id) {
     req.flash('error', 'El trabajo a editar no fue creado por vos. No podes editarlo.')
     return res.redirect(`/users/administration`)
   }
@@ -71,4 +68,17 @@ exports.editJob = async (req, res, next) => {
     runValidators: true
   })
   res.redirect(`/jobs/${job.url}`)
+}
+
+exports.deleteJob = async (req, res) => {
+  const job = await Job.findById(req.params.id)
+
+  // Check if the job was created by the same user
+  if (job.user.toString() !== req.user._id) {
+    res.status(403).send("Error")  
+  }
+
+  job.remove()
+
+  res.status(200).send("Job Deleted")
 }

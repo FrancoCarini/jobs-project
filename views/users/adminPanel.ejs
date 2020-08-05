@@ -7,23 +7,25 @@
   </div>
 
   <h2>Trabajos Creados</h2>
-  <% if (jobs.length) { %>
-    <% jobs.forEach(j => { %>
-      <div class="vacante panel-administracion">
-        <div class="caja">
-          <h3><%= j.company %></h3>
-          <p class="puesto"><%= j.title %></p>
+  <div class="panel-administracion">
+    <% if (jobs.length) { %>
+      <% jobs.forEach(j => { %>
+        <div class="vacante">
+          <div class="caja">
+            <h3><%= j.company %></h3>
+            <p class="puesto"><%= j.title %></p>
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="/jobs/applicants/<%= j.id %>" class="btn btn-amarillo">Inscriptos</a>
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="/jobs/edit/<%= j.url %>" class="btn btn-azul">Editar</a>
+          </div>
+          <div class="centrar-vertical caja">
+            <a href="#" data-id="<%= j.id %>" class="btn btn-rojo">Eliminar</a>
+          </div>
         </div>
-        <div class="centrar-vertical caja">
-          <a href="/jobs/applicants/<%= j.id %>" class="btn btn-amarillo">Inscriptos</a>
-        </div>
-        <div class="centrar-vertical caja">
-          <a href="/jobs/edit/<%= j.url %>" class="btn btn-azul">Editar</a>
-        </div>
-        <div class="centrar-vertical caja">
-          <a href="#" data-id="<%= j.id %>" class="btn btn-rojo">Eliminar</a>
-        </div>
-      </div>
-    <% }) %>
-  <% } %>
+      <% }) %>
+    <% } %>
+  </div>
 </main>

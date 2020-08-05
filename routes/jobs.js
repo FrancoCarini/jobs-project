@@ -7,7 +7,8 @@ const { newJobForm,
   addJob, 
   getJob, 
   editJobForm, 
-  editJob } = require('../controllers/jobs')
+  editJob,
+  deleteJob } = require('../controllers/jobs')
 
 router.route('/new')
   .get(isUserAuth, newJobForm)
@@ -17,5 +18,7 @@ router.get('/:url', getJob)
 router.route('/edit/:url')
   .get(isUserAuth, editJobForm)
   .post(isUserAuth, editJob)
+
+router.delete('/delete/:id', isUserAuth, deleteJob)
 
 module.exports = router
