@@ -13,6 +13,7 @@ const passport = require('./config/passport')
 const MongoStore = require('connect-mongo')(session)
 const expressLayouts = require('express-ejs-layouts')
 const flash = require('connect-flash')
+const fileupload = require('express-fileupload')
 
 // Routes
 const indexRoutes = require('./routes/index')
@@ -29,6 +30,9 @@ app.set('view engine', 'ejs');
 
 // Set Layout
 app.set('layout', 'layouts/layout');
+
+// File Upload
+app.use(fileupload())
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }))

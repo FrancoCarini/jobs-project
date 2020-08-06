@@ -1,6 +1,6 @@
 <main class="contenedor">
   <%- include('../partials/messages.ejs') %>
-  <form action="/users/edit" method="POST" class="default-form">
+  <form action="/users/edit" method="POST" class="default-form" enctype="multipart/form-data">
     <div class="campo">
       <label>Nombre</label>
       <input type="text" value="<%= user.name %>" name="name" placeholder="Ingresa tu nombre" required>
@@ -12,6 +12,10 @@
     <div class="campo">
       <label>Password</label>
       <input type="password" value="<%= user.password %>" name="password" placeholder="Ingresa tu password">
+    </div>
+    <div class="campo">
+      <label>Imagen</label>
+      <input type="file" name="image">
     </div>
     <div class="campo">
       <input type="submit" value="Editar" class="btn btn-azul">

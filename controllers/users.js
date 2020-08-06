@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const passport = require('passport')
 const Job = require('../models/Job')
+const path = require('path')
 
 exports.newUserForm = (req, res) => {
   res.render('users/newUser', {
@@ -57,6 +58,42 @@ exports.editUserForm = (req, res) => {
 }
 
 exports.editUser = async (req, res) => {
+  // There is an image
+  if (req.files) {
+    const file = req.files.image
+
+    // Validation
+    //Check if is an image
+    if (!file.mimetype.startsWith('image')) {
+      req.flash('error', 'El archivo no es una imagen')
+      return res.redirect('back')
+    }
+
+    const fileExt = process.env.FILE_TYPES.split(',');
+    // Check extension
+    if (!fileExt.includes(file.mimetype)) {
+      req.flash('error', 'El archivo no tiene una extension permitida')
+      return res.redirect('back')
+    }
+
+    // Check file size
+    if (file.size > process.env.MAX_FILE_UPLOAD) {
+      req.flash('error', 'El archivo es demasiado pesado')
+      return res.redirect('back')
+    }
+
+    //Create custom file name
+    file.name = `${req.user._id}_${path.parse(file.name).ext}`
+    req.body.image = file.name
+
+    file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, err => {
+      if (err) {
+        req.flash('error', 'Error subiendo archivo')
+        return res.redirect('back')
+      }
+    })
+  }
+
   const user = await User.findByIdAndUpdate(req.user._id, req.body, {
     new: true,
     runValidators: true
